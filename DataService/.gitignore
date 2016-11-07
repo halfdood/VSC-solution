@@ -1,0 +1,4 @@
+/.vs/*
+/src/DataService/bin/*
+/src/DataService/obj/*
+*user
