@@ -10,6 +10,7 @@ import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularcla
  */
 import { ENV_PROVIDERS } from './environment';
 import { routing } from './app.routing';
+import { DriverLogService } from './services/driver-log.service';
 
 // App is our top level component
 import { App } from './app.component';
@@ -50,7 +51,8 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    DriverLogService
   ]
 })
 

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using DataService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataService
 {
@@ -35,7 +37,11 @@ namespace DataService
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddApplicationInsightsTelemetry(Configuration);
+            var connection = Configuration["ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
+
+            services.AddCors();
 
             services.AddMvc();
         }
@@ -46,10 +52,14 @@ namespace DataService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
+            //app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             app.UseMvc();
         }
     }
