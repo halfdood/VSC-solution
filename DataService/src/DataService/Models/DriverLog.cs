@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DataService.Models
+﻿namespace DataService.Models
 {
     public partial class DriverLog
     {

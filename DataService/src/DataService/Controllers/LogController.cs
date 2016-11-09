@@ -1,10 +1,7 @@
-﻿using System;
+﻿using DataService.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using DataService.Models;
-using Microsoft.AspNetCore.Cors;
 
 namespace DataService.Controllers
 {
