@@ -5,10 +5,11 @@ namespace DataService.Interfaces
 {
     public interface IUserRepository
     {
+        void Add(User user);
+        bool Authenticate(User user);
+        void Delete(int id);
         List<User> Get();
         User Get(int id);
-        void Add(User user);
         void Update(int id, User user);
-        void Delete(int id);
     }
 }
