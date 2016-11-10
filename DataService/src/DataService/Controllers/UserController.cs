@@ -1,7 +1,6 @@
 ﻿using DataService.Interfaces;
 using DataService.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,6 +10,7 @@ namespace DataService.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+        private const string URL = "/api/user";
         private ISharedRepository _sharedRepo;
         private IUserRepository _userRepo;
 
@@ -24,16 +24,27 @@ namespace DataService.Controllers
 
         // GET: api/user
         [HttpGet]
-        public IEnumerable<User> Get()
+        public ActionResult Get()
         {
-            return _userRepo.Get();
+            return Json(new
+            {
+                data = _userRepo.Get(),
+                href = URL
+            });
         }
 
         // GET api/user/5
         [HttpGet("{id}")]
-        public User Get(int id)
+        public ActionResult Get(int id)
         {
-            return _userRepo.Get(id);
+            var self = URL + "/" + id.ToString();
+            return Json(new
+            {
+                data = _userRepo.Get(id),
+                href = self,
+                delete = self,
+                signout = URL + "/signout"
+            });
         }
 
         // POST api/user
