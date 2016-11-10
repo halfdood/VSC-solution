@@ -11,7 +11,7 @@ namespace DataService.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<DriverLog>().ToTable("DriverLog");
+            modelBuilder.Entity<LogBook>().ToTable("LogBook");
         }
     }
 }

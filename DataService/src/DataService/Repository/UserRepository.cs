@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DataService.Interfaces;
+﻿using DataService.Interfaces;
 using DataService.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataService.Repository
@@ -16,6 +16,15 @@ namespace DataService.Repository
         public UserRepository(DataContext context)
         {
             _context = context;
+        }
+
+        bool IUserRepository.Authenticate(string username, string password)
+        {
+            var user = Users
+                .Where(u => u.Name.ToLower() == username.ToLower())
+                .SingleOrDefault();
+
+            return user != null ? password == user.Password : false;
         }
 
         void IUserRepository.Add(User user)
@@ -40,7 +49,7 @@ namespace DataService.Repository
 
         User IUserRepository.Get(int id)
         {
-            return Users.SingleOrDefault(u => u.ID == id);
+            return get(id);
         }
 
         void IUserRepository.Update(int id, User user)
@@ -52,6 +61,11 @@ namespace DataService.Repository
 
             entity.Name = user.Name;
             entity.Password = user.Password;
+        }
+
+        private User get(int id)
+        {
+            return Users.SingleOrDefault(u => u.ID == id);
         }
 
         private void sanitise(User user)

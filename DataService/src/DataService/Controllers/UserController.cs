@@ -61,7 +61,7 @@ namespace DataService.Controllers
         [HttpPost("signin")]
         public async void SignIn([FromBody]User value)
         {
-            if (_userRepo.Authenticate(value))
+            if (_userRepo.Authenticate(value.Name, value.Password))
             {
                 var identity = new ClaimsIdentity(_sharedRepo.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, value.Name));

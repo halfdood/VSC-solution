@@ -31,9 +31,19 @@ namespace DataService
         {
             // Add framework services.
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ISharedRepository, SharedRepository>();
+            var useMockData = Configuration.GetValue<bool>("AppSettings:UseMockData");
+            if (useMockData)
+            {
+                services.AddSingleton<ILogBookRepository, MockLogBookRepository>();
+                services.AddSingleton<ISharedRepository, SharedRepository>();
+                services.AddSingleton<IUserRepository, MockUserRepository>();
+            }
+            else
+            {
+                services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
+                services.AddSingleton<ISharedRepository, SharedRepository>();
+                services.AddScoped<IUserRepository, UserRepository>();
+            }
 
             //services.AddCors();
 
