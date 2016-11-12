@@ -1,14 +1,21 @@
+# To build and run with Docker:
+#
+#  $ docker build -t ng-quickstart .
+#  $ docker run -it --rm -p 3000:3000 -p 3001:3001 ng-quickstart
+#
 FROM node:latest
 
-RUN git clone https://github.com/akveo/ng2-admin.git /var/www \
-    && cd /var/www \
-    && npm install --global rimraf \
-    && npm run clean \
-    && npm install --global webpack webpack-dev-server typescript@beta \
-    && npm install \
-    && npm run prebuild:prod && npm run build:prod
+RUN mkdir -p /quickstart /home/nodejs && \
+    groupadd -r nodejs && \
+    useradd -r -g nodejs -d /home/nodejs -s /sbin/nologin nodejs && \
+    chown -R nodejs:nodejs /home/nodejs
 
-EXPOSE 8080
+WORKDIR /quickstart
+COPY package.json /quickstart/
+RUN npm install --unsafe-perm=true
 
-WORKDIR /var/www
-ENTRYPOINT ["npm", "run", "server:prod"]
+COPY . /quickstart
+RUN chown -R nodejs:nodejs /quickstart
+USER nodejs
+
+CMD npm start
