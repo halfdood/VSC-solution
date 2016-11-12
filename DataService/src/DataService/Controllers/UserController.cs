@@ -2,6 +2,7 @@
 using DataService.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -70,15 +71,24 @@ namespace DataService.Controllers
 
         // POST api/user/signin
         [HttpPost("signin")]
-        public async void SignIn([FromBody]User value)
+        public async Task<Result> SignIn([FromBody]string name, [FromBody]string password)
         {
-            if (_userRepo.Authenticate(value.Name, value.Password))
+            if (_userRepo.Authenticate(name, password))
             {
                 var identity = new ClaimsIdentity(_sharedRepo.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, value.Name));
+                identity.AddClaim(new Claim(ClaimTypes.Name, name));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.Authentication.SignInAsync(_sharedRepo.AuthenticationScheme, principal);
+
+                var user = _userRepo.Get(name);
+                return Result.Data(new
+                {
+                    id = user.ID,
+                    name = user.Name
+                });
             }
+
+            return Result.Fail();
         }
 
         // POST api/user/signout

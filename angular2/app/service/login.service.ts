@@ -1,25 +1,55 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 import 'rxjs/add/operator/toPromise';
+
+
+import { SharedService } from '../service/shared.service';
 
 
 import { User } from '../model/user';
 
 
 @Injectable()
-export class LoginService {
+export class LoginService implements CanActivate {
     private headers = new Headers({'Content-Type': 'application/json'});
     private heroesUrl = 'app/heroes';
     private user: User;
 
 
-    constructor(private http: Http){}
+    constructor(
+        private http: Http,
+        private sharedService: SharedService
+    ){}
 
 
-    isLoggedIn(): Boolean {
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean>|Promise<boolean>|boolean {
         return this.user != null;
+    }
+
+    logIn(username: string, password: string): Promise<User> {
+        var url = this.sharedService.url.login;
+        var data = JSON.stringify({ name, password });
+        var headers = { headers: this.headers };
+
+        return this.http
+            .post(url, data, headers)
+            .toPromise()
+            .then(res =>{
+                var r = res.json();
+                if (r.success){
+                    return r.data;
+                } else {
+                    Promise.reject('Log in failed.');
+                }
+            })
+            .catch(this.handleError);
     }
 
     // create(name: string): Promise<Hero> {
@@ -59,8 +89,8 @@ export class LoginService {
     //         .catch(this.handleError);
     // }
 
-    // private handleError(error: any): Promise<any> {
-    //     console.error('An error occurred', error);
-    //     return Promise.reject(error.message || error);
-    // }
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
+    }
 }
