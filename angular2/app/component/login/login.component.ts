@@ -4,10 +4,10 @@ import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/form
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
-  styles: [require('./login.scss')],
-  template: require('./login.html'),
+  templateUrl: './app/component/login/login.component.html',
+  styleUrls: ['./app/component/login/login.component.css']
 })
-export class Login {
+export class LoginComponent {
 
   public form:FormGroup;
   public email:AbstractControl;

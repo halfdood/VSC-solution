@@ -30,6 +30,10 @@ export class LoginService implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean>|Promise<boolean>|boolean {
+        return this.isLoggedIn();
+    }
+
+    isLoggedIn(): boolean {
         return this.user != null;
     }
 

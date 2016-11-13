@@ -1,7 +1,7 @@
 import './rxjs-extensions';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
 
@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroSearchComponent } from './hero-search.component';
+import { LoginComponent } from './component/login/login.component';
 
 
 import { LoginService } from './service/login.service';
@@ -28,7 +29,7 @@ import { SharedService } from './service/shared.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   declarations: [
@@ -36,7 +37,8 @@ import { SharedService } from './service/shared.service';
     DashboardComponent,
     HeroDetailComponent,
     HeroSearchComponent,
-    HeroesComponent
+    HeroesComponent,
+    LoginComponent
   ],
   bootstrap:    [ AppComponent ],
   providers: [
