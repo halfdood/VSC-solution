@@ -6,8 +6,7 @@ import { Url } from '../model/url';
 
 @Injectable()
 export class SharedService {
-    url: Url;
 
 
-    constructor(){}
+    constructor(public url: Url){}
 }

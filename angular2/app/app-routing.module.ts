@@ -10,7 +10,7 @@ import { LoginService }         from './service/login.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent, },
+  { path: 'dashboard',  component: DashboardComponent, canActivate: [LoginService]},
   { path: 'detail/:id', component: HeroDetailComponent, canActivate: [LoginService] },
   { path: 'heroes',     component: HeroesComponent, canActivate: [LoginService] }
 ];

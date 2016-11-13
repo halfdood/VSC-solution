@@ -45,7 +45,7 @@ namespace DataService
                 services.AddScoped<IUserRepository, UserRepository>();
             }
 
-            //services.AddCors();
+            services.AddCors();
 
             services.AddMvc();
         }
@@ -60,10 +60,10 @@ namespace DataService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            //app.UseCors(builder => builder
-            //    .AllowAnyOrigin()
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader());
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {

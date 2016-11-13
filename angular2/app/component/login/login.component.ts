@@ -1,5 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
+import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'login',
@@ -10,23 +13,33 @@ import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/form
 export class LoginComponent {
 
   public form:FormGroup;
-  public email:AbstractControl;
+  public username:AbstractControl;
   public password:AbstractControl;
   public submitted:boolean = false;
 
-  constructor(fb:FormBuilder) {
+  constructor(
+    fb:FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {
     this.form = fb.group({
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
+      'name': [''],
+      'password': ['']
     });
 
-    this.email = this.form.controls['email'];
+    this.username = this.form.controls['name'];
     this.password = this.form.controls['password'];
   }
 
   public onSubmit(values:Object):void {
     this.submitted = true;
     if (this.form.valid) {
+      this.loginService.logIn(this.username.value, this.password.value)
+        .then(success => {
+          if (success){
+            this.router.navigateByUrl('');
+          }
+        })
       // your code goes here
       // console.log(values);
     }

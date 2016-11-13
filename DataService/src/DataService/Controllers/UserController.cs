@@ -71,16 +71,16 @@ namespace DataService.Controllers
 
         // POST api/user/signin
         [HttpPost("signin")]
-        public async Task<Result> SignIn([FromBody]string name, [FromBody]string password)
+        public async Task<Result> SignIn([FromBody]Login login)
         {
-            if (_userRepo.Authenticate(name, password))
+            if (_userRepo.Authenticate(login.Username, login.Password))
             {
                 var identity = new ClaimsIdentity(_sharedRepo.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, name));
+                identity.AddClaim(new Claim(ClaimTypes.Name, login.Username));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.Authentication.SignInAsync(_sharedRepo.AuthenticationScheme, principal);
 
-                var user = _userRepo.Get(name);
+                var user = _userRepo.Get(login.Username);
                 return Result.Data(new
                 {
                     id = user.ID,

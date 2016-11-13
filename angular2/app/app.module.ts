@@ -24,6 +24,9 @@ import { LoginService } from './service/login.service';
 import { SharedService } from './service/shared.service';
 
 
+import { Url } from './model/url';
+
+
 @NgModule({
   imports:      [
     BrowserModule,
@@ -43,7 +46,8 @@ import { SharedService } from './service/shared.service';
   bootstrap:    [ AppComponent ],
   providers: [
     LoginService,
-    SharedService
+    SharedService,
+    Url
   ]
 })
 export class AppModule { }

@@ -37,9 +37,9 @@ export class LoginService implements CanActivate {
         return this.user != null;
     }
 
-    logIn(username: string, password: string): Promise<User> {
+    logIn(username: string, password: string): Promise<boolean> {
         var url = this.sharedService.url.login;
-        var data = JSON.stringify({ name, password });
+        var data = JSON.stringify({ username, password });
         var headers = { headers: this.headers };
 
         return this.http
@@ -47,7 +47,8 @@ export class LoginService implements CanActivate {
             .toPromise()
             .then(res =>{
                 var r = res.json();
-                if (r.success){
+                if (r.success) {
+                    this.user = r.data;
                     return r.data;
                 } else {
                     Promise.reject('Log in failed.');
@@ -94,7 +95,7 @@ export class LoginService implements CanActivate {
     // }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
+        console.error('An error occurred while communicating with the server', error);
         return Promise.reject(error.message || error);
     }
 }
