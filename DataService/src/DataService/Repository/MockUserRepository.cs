@@ -47,6 +47,11 @@ namespace DataService.Repository
             return get(id);
         }
 
+        public User Get(string name)
+        {
+            return _data.SingleOrDefault(u => u.Name.ToLower() == name.ToLower());
+        }
+
         void IUserRepository.Update(int id, User value)
         {
             var user = get(id);
