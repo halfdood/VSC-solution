@@ -5,7 +5,6 @@
   width: 100%;
   position: absolute;
 }
-
 .auth-block {
   width: 540px;
   margin: 0 auto;
@@ -18,10 +17,6 @@
     font-weight: 300;
     margin-bottom: 28px;
     text-align: center;
-  }
-
-  .auth-block p {
-    font-size: 16px;
   }
 
   .auth-block a {
@@ -111,7 +106,3 @@ a.forgot-pass {
       .al-share-auth .al-share li i {
         font-size: 24px;
       }
-
-.btn-auth {
-  color: #ffffff!important;
-}
