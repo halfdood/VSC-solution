@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent, canActivate: [LoginService]},
   { path: 'detail/:id', component: HeroDetailComponent, canActivate: [LoginService] },
-  { path: 'heroes',     component: HeroesComponent, canActivate: [LoginService] }
+  { path: 'map',     component: HeroesComponent, canActivate: [LoginService] }
 ];
 
 
