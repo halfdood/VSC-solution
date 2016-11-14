@@ -7,10 +7,10 @@ import { LoginService } from './service/login.service';
 @Component({
     selector: 'my-app',
     template: `
-        <div *ngIf="loginSerivce.isLoggedIn()">
+        <div *ngIf="loginSerivce.isLoggedIn()" class="content">
             <h1>{{title}}</h1>
             <nav>
-                <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+                <a routerLink="/logbook" routerLinkActive="active">Logbook</a>
                 <a routerLink="/map" routerLinkActive="active">Heroes</a>
             </nav>
         </div>

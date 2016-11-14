@@ -15,7 +15,6 @@ import { User } from '../model/user';
 
 @Injectable()
 export class LoginService implements CanActivate {
-    private headers = new Headers({'Content-Type': 'application/json'});
     private heroesUrl = 'app/heroes';
     private user: User;
 
@@ -40,7 +39,7 @@ export class LoginService implements CanActivate {
     logIn(username: string, password: string): Promise<boolean> {
         var url = this.sharedService.url.login;
         var data = JSON.stringify({ username, password });
-        var headers = { headers: this.headers };
+        var headers = { headers: this.sharedService.jsonHeaders };
 
         return this.http
             .post(url, data, headers)

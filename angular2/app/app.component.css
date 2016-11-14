@@ -26,3 +26,7 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+
+.content{
+  position: absolute;
+}

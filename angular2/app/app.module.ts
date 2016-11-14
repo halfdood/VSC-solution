@@ -13,13 +13,14 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 
 import { AppComponent }  from './app.component';
-import { DashboardComponent } from './dashboard.component';
+import { LogbookComponent } from './component/logbook/logbook.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroSearchComponent } from './hero-search.component';
 import { LoginComponent } from './component/login/login.component';
 
 
+import { LogbookService } from './service/logbook.service';
 import { LoginService } from './service/login.service';
 import { SharedService } from './service/shared.service';
 
@@ -37,7 +38,7 @@ import { Url } from './model/url';
   ],
   declarations: [
     AppComponent,
-    DashboardComponent,
+    LogbookComponent,
     HeroDetailComponent,
     HeroSearchComponent,
     HeroesComponent,
@@ -46,6 +47,7 @@ import { Url } from './model/url';
   bootstrap:    [ AppComponent ],
   providers: [
     LoginService,
+    LogbookService,
     SharedService,
     Url
   ]

@@ -1,15 +1,17 @@
 ﻿using DataService.Interfaces;
 using DataService.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace DataService.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class LogBookController : Controller
     {
+        private const string URL = "/api/logbook";
         private ILogBookRepository _repo;
 
         public LogBookController(ILogBookRepository repo)
@@ -19,16 +21,26 @@ namespace DataService.Controllers
 
         // GET api/logbook
         [HttpGet]
-        public IEnumerable<LogBook> Get()
+        public ActionResult Get()
         {
-            return _repo.Get();
+            return Json(new
+            {
+                data = _repo.Get(),
+                href = URL
+            });
         }
 
         // GET api/logbook/5
         [HttpGet("{id}")]
-        public LogBook Get(int id)
+        public ActionResult Get(int id)
         {
-            return _repo.Get(id);
+            var self = URL + "/" + id.ToString();
+            return Json(new
+            {
+                data = _repo.Get(id),
+                href = self,
+                delete = self
+            });
         }
 
         // POST api/logbook

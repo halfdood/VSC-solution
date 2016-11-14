@@ -42,6 +42,7 @@ namespace DataService
             {
                 services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
                 services.AddSingleton<ISharedRepository, SharedRepository>();
+                services.AddScoped<ILogBookRepository, LogbookRepository>();
                 services.AddScoped<IUserRepository, UserRepository>();
             }
 
@@ -60,10 +61,7 @@ namespace DataService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors(builder => builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
