@@ -1,0 +1,11 @@
+<div *ngIf="loginSerivce.isLoggedIn()" class="content">
+    <h1>{{title}}</h1>
+    <nav>
+        <a routerLink="/logbook" routerLinkActive="active">Logbook</a>
+        <a routerLink="/map" routerLinkActive="active">Map</a>
+    </nav>
+</div>
+<div *ngIf="!loginSerivce.isLoggedIn()">
+    <login></login>
+</div>
+<router-outlet></router-outlet>

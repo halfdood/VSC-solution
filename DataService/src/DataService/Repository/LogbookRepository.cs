@@ -21,11 +21,13 @@ namespace DataService.Repository
         void ILogBookRepository.Add(LogBook value)
         {
             Logs.Add(value);
+            _context.SaveChanges();
         }
 
         void ILogBookRepository.Delete(int id)
         {
             Logs.Remove(new LogBook { ID = id });
+            _context.SaveChanges();
         }
 
         IEnumerable<LogBook> ILogBookRepository.Get()
@@ -42,6 +44,7 @@ namespace DataService.Repository
         {
             var entity = get(id);
             entity.DriverName = value.DriverName;
+            _context.SaveChanges();
         }
 
         private LogBook get(int id)

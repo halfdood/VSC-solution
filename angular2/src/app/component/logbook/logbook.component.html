@@ -1,0 +1,27 @@
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Customer</th>
+                <th>Depot</th>
+                <th>Has Arrived</th>
+                <th>Has Departed</th>
+                <th>Lat</th>
+                <th>Long</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logs">
+                <td>{{log.driverName}}</td>
+                <td>{{log.customerName}}</td>
+                <td>{{log.depotName}}</td>
+                <td>{{log.hasArrived}}</td>
+                <td>{{log.hasDeparted}}</td>
+                <td>{{log.lat}}</td>
+                <td>{{log.long}}</td>
+                <td><button type="button" [routerLink]="['/detail', log.id]">edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

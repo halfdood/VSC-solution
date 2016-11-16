@@ -1,0 +1,10 @@
+table {
+  background-color: rgba(190,190,190,0.2)
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 80px;
+}

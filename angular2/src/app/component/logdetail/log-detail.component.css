@@ -1,0 +1,12 @@
+.content {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 80px;
+}
+
+.content label {
+    display: inline-block;
+    margin-left: 20px;
+    width: 200px;
+}

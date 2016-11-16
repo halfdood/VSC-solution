@@ -1,0 +1,41 @@
+<div class="content" *ngIf="log">
+    <div>
+        <label>Customer Name</label>
+        <input [(ngModel)]="log.customerName" placeholder="customer name" />
+    </div>
+    <div>
+        <label>Depot Name</label>
+        <input [(ngModel)]="log.depotName" placeholder="depot name" />
+    </div>
+    <div>
+        <label>Driver Name</label>
+        <input [(ngModel)]="log.driverName" placeholder="driver name" />
+    </div>
+    <div>
+        <label>Driver Reference</label>
+        <input [(ngModel)]="log.driverReference" placeholder="driver reference" />
+    </div>
+    <div>
+        <label>Latitude</label>
+        <input [(ngModel)]="log.lat" type="number" />
+    </div>
+    <div>
+        <label>Longitude</label>
+        <input [(ngModel)]="log.long" type="number" />
+    </div>
+    <div>
+        <label>Location Name</label>
+        <input [(ngModel)]="log.locationName" placeholder="location name" />
+    </div>
+    <div>
+        <label>Route Name</label>
+        <input [(ngModel)]="log.routeName" placeholder="route name" />
+    </div>
+    <div>
+        <label>Sequence No</label>
+        <input [(ngModel)]="log.sequenceNo" placeholder="sequence no" type="number" />
+    </div>
+
+    <button (click)="goBack()">Back</button>
+    <button (click)="save()">Save</button>
+</div>
