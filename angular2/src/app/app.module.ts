@@ -9,9 +9,11 @@ import { AppComponent } from './app.component';
 import { LogbookComponent } from './component/logbook/logbook.component';
 import { LoginComponent } from './component/login/login.component';
 import { LogDetailComponent } from './component/logdetail/log-detail.component';
+import { LeafletComponent } from './component/leaflet/leaflet.component';
 
 import { LogbookService } from './service/logbook.service';
 import { LoginService } from './service/login.service';
+import { MapService } from './service/map.service';
 import { SharedService } from './service/shared.service';
 
 import { Url } from './model/url';
@@ -22,7 +24,8 @@ import { Url } from './model/url';
     AppComponent,
     LogbookComponent,
     LoginComponent,
-    LogDetailComponent
+    LogDetailComponent,
+    LeafletComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { Url } from './model/url';
   providers: [
     LoginService,
     LogbookService,
+    MapService,
     SharedService,
     Url
   ],

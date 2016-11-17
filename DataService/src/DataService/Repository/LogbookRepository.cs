@@ -40,10 +40,27 @@ namespace DataService.Repository
             return get(id);
         }
 
+        List<Point> ILogBookRepository.GetPoints()
+        {
+            return Logs.Select(l => new Point
+            {
+                Latitude = l.Lat,
+                Longitude = l.Long
+            }).ToList();
+        }
+
         void ILogBookRepository.Update(int id, LogBook value)
         {
             var entity = get(id);
+            entity.CustomerName = value.CustomerName;
+            entity.DepotName = value.DepotName;
             entity.DriverName = value.DriverName;
+            entity.DriverReference = value.DriverReference;
+            entity.Lat = value.Lat;
+            entity.Long = value.Long;
+            entity.LocationName = value.LocationName;
+            entity.RouteName = value.RouteName;
+            entity.SequenceNo = value.SequenceNo;
             _context.SaveChanges();
         }
 

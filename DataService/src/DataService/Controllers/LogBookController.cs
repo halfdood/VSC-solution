@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace DataService.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class LogBookController : Controller
     {
@@ -40,6 +40,17 @@ namespace DataService.Controllers
                 data = _repo.Get(id),
                 href = self,
                 delete = self
+            });
+        }
+
+        // GET api/logbook/points
+        [HttpGet("points")]
+        public ActionResult GetPoints()
+        {
+            return Json(new
+            {
+                data = _repo.GetPoints(),
+                href = URL + "/points"
             });
         }
 

@@ -2,6 +2,7 @@
 using DataService.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace DataService.Repository
 {
@@ -41,6 +42,15 @@ namespace DataService.Repository
         private LogBook get(int id)
         {
             return _data.SingleOrDefault(l => l.ID == id);
+        }
+
+        List<Point> ILogBookRepository.GetPoints()
+        {
+            return _data.Select(d => new Point
+            {
+                Latitude = d.Lat,
+                Longitude = d.Long
+            }).ToList();
         }
     }
 }

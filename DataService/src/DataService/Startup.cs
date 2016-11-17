@@ -49,7 +49,7 @@ namespace DataService
                 services.AddScoped<IUserRepository, UserRepository>();
             }
 
-            services.AddCors();
+            //services.AddCors();
 
             services.AddMvc();
         }
@@ -64,7 +64,7 @@ namespace DataService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+            //app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
@@ -82,14 +82,10 @@ namespace DataService
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

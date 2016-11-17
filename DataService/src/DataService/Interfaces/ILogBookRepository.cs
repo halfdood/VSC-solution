@@ -10,5 +10,6 @@ namespace DataService.Interfaces
         IEnumerable<LogBook> Get();
         LogBook Get(int id);
         void Update(int id, LogBook value);
+        List<Point> GetPoints();
     }
 }

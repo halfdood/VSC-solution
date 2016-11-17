@@ -40,8 +40,6 @@ export class LoginComponent {
             this.router.navigateByUrl('');
           }
         })
-      // your code goes here
-      // console.log(values);
     }
   }
 }
